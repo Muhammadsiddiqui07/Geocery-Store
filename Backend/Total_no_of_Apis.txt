@@ -1,0 +1,48 @@
+Backend Apis for grocery store:
+
+Authentication Apis
+1-login
+2-signup
+3-logout
+4-refresh token
+5-login with google (Oauth)
+
+User Apis 
+1-get user profile 
+2-update user profile 
+3-delete user profile
+
+Product Apis
+1-get all product
+2-get single product
+3-create product (admin)
+4-update product (admin)
+5-delete product (admin)
+
+Category Apis
+1-get all categories
+2-get single category
+3-create category
+4-update category
+5-delete category
+
+Cart Apis 
+1-add to cart
+2-get user cart
+3-update cart item
+4-delete cart item 
+5-clear cart item
+
+Order Apis
+1-create order
+2-get user orders
+3-get all orders (admin)
+4-update order status (admin)
+5-delete order (admin)
+6-delete order as a user 
+
+Notification Apis 
+1-get user notification
+2-mark notification read
+
+
