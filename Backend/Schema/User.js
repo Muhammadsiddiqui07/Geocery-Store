@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isLogin: {
+      type: Boolean,
+      default: true,
+    },
     address: String,
     phone: String,
   },
@@ -29,7 +33,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const user = mongoose.model('user', userSchema);
+const user = mongoose.model('Users', userSchema);
 
 
 export default user

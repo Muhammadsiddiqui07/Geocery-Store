@@ -4,8 +4,7 @@ Authentication Apis
 1-login
 2-signup
 3-logout
-4-refresh token
-5-login with google (Oauth)
+4-login with google (Oauth)
 
 User Apis 
 1-get user profile 

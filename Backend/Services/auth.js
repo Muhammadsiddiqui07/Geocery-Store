@@ -4,6 +4,7 @@ import { google } from 'googleapis';
 import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import user from '../Schema/User.js';
 
 
 
@@ -102,6 +103,33 @@ router.get('/googleCallback', async (req, res) => {
         res.send({ message: 'Google login successful!', user: data });
     } catch (err) {
         res.status(400).send({ message: err.message });
+    }
+});
+
+
+router.post('/logout', async (req, res) => {
+    const { email, isLogin } = req.body;
+
+    if (!email || typeof isLogin === 'undefined') {
+        return res.status(400).send({ message: 'Bad Request' });
+    }
+
+    try {
+        const existingUser = await User.findOne({ email });
+
+        if (!existingUser) {
+            return res.status(404).send({ message: 'User does not exist' });
+        }
+
+        await User.updateOne(
+            { email: email },
+            { $set: { isLogin: false } } 
+        );
+
+        return res.status(200).send({ message: 'User logged out successfully' });
+    } catch (error) {
+        console.error('Logout error:', error);
+        return res.status(500).send({ message: 'Internal Server Error' });
     }
 });
 
