@@ -98,7 +98,7 @@ router.get('/googleCallback', async (req, res) => {
         const oauth2 = google.oauth2({ version: 'v2', auth: oauth2Client });
         const { data } = await oauth2.userinfo.get();
         const { email, name } = data;
-        
+
         res.send({ message: 'Google login successful!', user: data });
     } catch (err) {
         res.status(400).send({ message: err.message });
@@ -106,35 +106,35 @@ router.get('/googleCallback', async (req, res) => {
 });
 
 
-// // DELETE: Delete User (Requires Auth)
-// router.delete('/delete', verifyToken, async (req, res) => {
-//     try {
-//         await User.findByIdAndDelete(req.user._id);
-//         res.status(200).json({ success: true, message: 'User deleted successfully' });
-//     } catch (err) {
-//         res.status(500).json({ success: false, message: err.message });
-//     }
-// });
+// DELETE: Delete User (Requires Auth)
+router.delete('/delete', async (req, res) => {
+    try {
+        await User.findByIdAndDelete(req.user._id);
+        res.status(200).json({ success: true, message: 'User deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
 
-// // PUT: Update User (Requires Auth)
-// router.put('/update', verifyToken, async (req, res) => {
-//     try {
-//         const { name, phone, password } = req.body;
-//         const updateData = {};
+// PUT: Update User (Requires Auth)
+router.put('/update', async (req, res) => {
+    try {
+        const { name, phone, password } = req.body;
+        const updateData = {};
 
-//         if (name) updateData.name = name;
-//         if (phone) updateData.phone = phone;
-//         if (password) {
-//             const hashed = await bcrypt.hash(password, 10);
-//             updateData.password = hashed;
-//         }
+        if (name) updateData.name = name;
+        if (phone) updateData.phone = phone;
+        if (password) {
+            const hashed = await bcrypt.hash(password, 10);
+            updateData.password = hashed;
+        }
 
-//         const updatedUser = await User.findByIdAndUpdate(req.user._id, updateData, { new: true });
-//         res.status(200).json({ success: true, message: 'User updated successfully', user: updatedUser });
+        const updatedUser = await User.findByIdAndUpdate(req.user._id, updateData, { new: true });
+        res.status(200).json({ success: true, message: 'User updated successfully', user: updatedUser });
 
-//     } catch (err) {
-//         res.status(500).json({ success: false, message: err.message });
-//     }
-// });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
 
 export default router;

@@ -3,10 +3,18 @@ import cors from 'cors';
 import router from "./routers/index.js";
 import dotenv from 'dotenv';
 import session from 'express-session';
+import mongoose from './Db/index.js'
 
 
 dotenv.config();
 const app = express()
+const db = mongoose.connection;
+
+db.on('Error agaya---->', console.error.bind(console, 'Connection error'))
+db.once('open', function () {
+    console.log('db connected!');
+})
+
 
 app.use(
     session({
@@ -17,7 +25,7 @@ app.use(
     })
 );
 
-app.use(express.json()) 
+app.use(express.json())
 
 app.use(cors())
 
