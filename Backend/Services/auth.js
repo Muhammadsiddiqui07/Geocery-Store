@@ -134,35 +134,4 @@ router.post('/logout', async (req, res) => {
 });
 
 
-// DELETE: Delete User (Requires Auth)
-router.delete('/delete', async (req, res) => {
-    try {
-        await User.findByIdAndDelete(req.user._id);
-        res.status(200).json({ success: true, message: 'User deleted successfully' });
-    } catch (err) {
-        res.status(500).json({ success: false, message: err.message });
-    }
-});
-
-// PUT: Update User (Requires Auth)
-router.put('/update', async (req, res) => {
-    try {
-        const { name, phone, password } = req.body;
-        const updateData = {};
-
-        if (name) updateData.name = name;
-        if (phone) updateData.phone = phone;
-        if (password) {
-            const hashed = await bcrypt.hash(password, 10);
-            updateData.password = hashed;
-        }
-
-        const updatedUser = await User.findByIdAndUpdate(req.user._id, updateData, { new: true });
-        res.status(200).json({ success: true, message: 'User updated successfully', user: updatedUser });
-
-    } catch (err) {
-        res.status(500).json({ success: false, message: err.message });
-    }
-});
-
 export default router;
