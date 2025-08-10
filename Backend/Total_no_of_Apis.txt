@@ -1,20 +1,20 @@
 Backend Apis for grocery store:
 
 Authentication Apis
-1-login
-2-signup
-3-logout
-4-login with google (Oauth)
+1-login ✔
+2-signup ✔
+3-logout ✔
+4-login with google (Oauth) ✔
 
 User Apis 
-1-get user profile 
-2-update user profile 
-3-delete user profile
+1-get user profile ✔
+2-update user profile ✔
+3-delete user profile ✔
 
 Product Apis
-1-get all product
-2-get single product
-3-create product (admin)
+1-get all product ✔
+2-get single product ✔
+3-create product (admin) ✔
 4-update product (admin)
 5-delete product (admin)
 

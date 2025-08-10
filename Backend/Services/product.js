@@ -22,4 +22,33 @@ router.post('/addproduct', async (req, res) => {
     }
 })
 
+router.get('/getallproduct', async (req, res) => {
+    try {
+        const allProduct = await Product.find({})
+        if (!allProduct) {
+            return res.status(400).send({ message: 'Product not found!' })
+        } else {
+            return res.status(200).send({ message: 'Product Found!', allProduct })
+        }
+    } catch (err) {
+        return res.status(401).send({ message: 'Internal Server Error', err })
+    }
+})
+
+
+router.get('/getproduct', async (req, res) => {
+    try {
+        const { productId } = req.body
+        const requiredProduct = await Product.findOne({ productId: productId })
+        if (!requiredProduct) {
+            return res.status(400).send({ message: 'Product not found!' })
+        } else {
+            return res.status(200).send({ message: 'Product Found!', requiredProduct })
+        }
+    } catch (err) {
+        return res.status(401).send({ message: 'Internal Server Error', err })
+    }
+})
+
+
 export default router
