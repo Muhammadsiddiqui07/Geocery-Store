@@ -4,7 +4,6 @@ import { google } from 'googleapis';
 import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import user from '../Schema/User.js';
 
 
 

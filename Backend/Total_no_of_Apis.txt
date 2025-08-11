@@ -15,8 +15,8 @@ Product Apis
 1-get all product ✔
 2-get single product ✔
 3-create product (admin) ✔
-4-update product (admin)
-5-delete product (admin)
+4-update product (admin)✔
+5-delete product (admin)✔
 
 Category Apis
 1-get all categories

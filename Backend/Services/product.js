@@ -50,5 +50,41 @@ router.get('/getproduct', async (req, res) => {
     }
 })
 
+router.put('/updateproduct', async (req, res) => {
+    try {
+        const { productId, name, price, category, image, rating } = req.body
+        const updateData = {};
+        if (name) updateData.name = name;
+        if (price) updateData.price = price;
+        if (category) updateData.category = category
+        if (image) updateData.image = image
+        if (rating) updateData.rating = rating
+
+        const updateProduct = await Product.findByIdAndUpdate(productId, updateData, { new: true })
+        return res.status(200).send({ message: 'Product Updated Successfully!', updateProduct })
+    } catch (err) {
+        return res.status(400).send({ message: 'Internal server error', err })
+    }
+})
+
+router.delete('/deleteproduct', async (req, res) => {
+    try {
+        const { id } = req.body
+        if (id) {
+            const deleteproduct = await Product.findByIdAndDelete(id)
+            if (!deleteproduct) {
+                return res.status(404).send({ message: 'Product not found!' })
+            } else {
+                return res.status(200).send({ message: 'Product Delete Successfully!' })
+            }
+        } else {
+            return res.status(401).send({ message: 'bad request!' })
+        }
+
+    } catch (err) {
+        return res.status(401).send({ message: 'Internal Server Error', err })
+    }
+})
+
 
 export default router
