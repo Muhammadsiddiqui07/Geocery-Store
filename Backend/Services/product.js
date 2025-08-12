@@ -9,7 +9,7 @@ router.post('/addproduct', async (req, res) => {
 
         const { productId, name, price, category, image, rating } = req.body
         const existingProduct = await Product.findById({ productId })
-        if (!existingProduct) {
+        if (existingProduct) {
             return res.status(400).send({ message: "Product Already Exists" })
         }
         else {

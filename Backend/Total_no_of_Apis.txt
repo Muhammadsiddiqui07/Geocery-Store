@@ -19,11 +19,11 @@ Product Apis
 5-delete product (admin)✔
 
 Category Apis
-1-get all categories
-2-get single category
-3-create category
-4-update category
-5-delete category
+1-get all categories ✔
+2-get single category ✔
+3-create category ✔
+4-update category ✔
+5-delete category ✔
 
 Cart Apis 
 1-add to cart
