@@ -7,14 +7,15 @@ import mongoose from './Db/index.js'
 
 
 dotenv.config();
+
 const app = express()
+
 const db = mongoose.connection;
 
-db.on('Error agaya---->', console.error.bind(console, 'Connection error'))
-db.once('open', function () {
-    console.log('db connected!');
-})
-
+db.on("error ", console.error.bind(console, " Connection error:"));
+db.once("open", function () {
+    console.log(" DB connected!");
+});
 
 app.use(
     session({
