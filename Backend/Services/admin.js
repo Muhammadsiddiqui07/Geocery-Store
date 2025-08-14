@@ -1,5 +1,6 @@
 import express from 'express';
 import user from '../Schema/User.js';
+import bcrypt  from 'bcrypt'
 
 const router = express.Router()
 
@@ -19,7 +20,7 @@ router.get('/getuser', async (req, res) => {
     const { email, _id } = req.body
     const getUser = await user.findById({ _id: _id })
     if (!getUser) {
-        return res.status(400).send({ message: 'User not found' })
+        return res.status(401).send({ message: 'User not found' })
     } else {
         return res.status(200).status({ message: 'user found successfully!', getUser })
     }
@@ -29,7 +30,8 @@ router.get('/getuser', async (req, res) => {
 // DELETE: Delete User (Requires Auth)
 router.delete('/delete', async (req, res) => {
     try {
-        await user.findByIdAndDelete(req.user._id);
+        const { email } = req.body
+        await user.findOneAndDelete({ email: email });
         res.status(200).json({ success: true, message: 'User deleted successfully' });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
@@ -39,17 +41,18 @@ router.delete('/delete', async (req, res) => {
 // PUT: Update User (Requires Auth)
 router.put('/update', async (req, res) => {
     try {
-        const { name, phone, password } = req.body;
+        const { name, phone, password, email } = req.body;
         const updateData = {};
 
         if (name) updateData.name = name;
         if (phone) updateData.phone = phone;
+        if (email) updateData.email = email;
         if (password) {
             const hashed = await bcrypt.hash(password, 10);
             updateData.password = hashed;
         }
 
-        const updatedUser = await user.findByIdAndUpdate(req.user._id, updateData, { new: true });
+        const updatedUser = await user.findByIdAndUpdate(req.body._id, updateData, { new: true });
         res.status(200).json({ success: true, message: 'User updated successfully', user: updatedUser });
 
     } catch (err) {
