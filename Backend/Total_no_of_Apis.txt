@@ -29,8 +29,8 @@ Cart Apis
 1-add to cart
 2-get user cart
 3-update cart item
-4-delete cart item 
-5-clear cart item
+4-delete single cart item 
+5-clear all cart item
 
 Order Apis
 1-create order
