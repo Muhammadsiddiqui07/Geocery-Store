@@ -26,19 +26,19 @@ Category Apis
 5-delete category ✔
 
 Cart Apis 
-1-add to cart
-2-get user cart
-3-update cart item
-4-delete single cart item 
-5-clear all cart item
+1-add to cart ✔
+2-get user cart ✔
+3-update cart item ✔
+4-delete single cart item ✔ 
+5-clear all cart item ✔
 
 Order Apis
-1-create order
-2-get user orders
-3-get all orders (admin)
-4-update order status (admin)
-5-delete order (admin)
-6-delete order as a user 
+1-create order ✔
+2-get user orders ✔
+3-get all orders (admin) ✔
+4-update order status (admin) ✔
+5-delete order (admin) ✔
+6-delete order as a user ✔
 
 Notification Apis 
 1-get user notification
