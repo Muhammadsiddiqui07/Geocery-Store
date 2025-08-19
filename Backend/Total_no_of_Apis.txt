@@ -41,7 +41,7 @@ Order Apis
 6-delete order as a user ✔
 
 Notification Apis 
-1-get user notification
-2-mark notification read
+1-get user notification ✔
+2-mark notification read ✔
 
 
