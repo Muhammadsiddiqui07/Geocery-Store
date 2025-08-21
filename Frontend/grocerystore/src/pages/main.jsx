@@ -5,6 +5,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from '../Assests/logo.png'
 import { FaCartShopping } from "react-icons/fa6";
 import { Button } from 'antd';
+import backgroundImage from '../Assests/back.png'
+import image from '../Assests/front.png'
 
 
 
@@ -52,18 +54,30 @@ export default function MainPage() {
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-center">
 
-                        <Button type="primary" style={{
-                            marginRight:'15px'
-                        }}>
-                            <a href="#" className="text-sm/6 font-semibold text-white">
-                                Log in <span aria-hidden="true">&rarr;</span>
-                            </a>
-                        </Button>
-                        <Button>
-                            <a href="#" className="text-sm/6 font-semibold text-white">
-                                Register
-                            </a>
-                        </Button>
+                        <div className="flex gap-4">
+                            {/* Solid Button */}
+                            <Button type="success"
+                                className="rounded-md bg-green-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg 
+    hover:bg-white hover:text-green-600 hover:border hover:border-green-600 
+    focus:ring-2 focus:ring-green-600 focus:ring-offset-2 transition duration-200"
+                            >
+                                <a href="#" className="text-sm font-semibold">
+                                    Log in <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </Button>
+
+                            {/* Outline Button */}
+                            <Button type="success"
+                                className="rounded-md bg-white border border-green-600 px-4 py-2.5 text-sm font-semibold text-green-600 shadow-lg 
+    hover:bg-green-600 hover:text-white 
+    focus:ring-2 focus:ring-green-600 focus:ring-offset-2 transition duration-200"
+                            >
+                                <a href="#" className="text-sm font-semibold">
+                                    Register
+                                </a>
+                            </Button>
+                        </div>
+
 
                     </div>
                 </nav>
@@ -75,8 +89,8 @@ export default function MainPage() {
                                 <span className="sr-only">Your Company</span>
                                 <img
                                     alt=""
-                                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                                    className="h-8 w-auto"
+                                    src={logo}
+                                    className="h-12 w-auto"
                                 />
                             </a>
                             <button
@@ -115,63 +129,56 @@ export default function MainPage() {
                 </Dialog>
             </header>
 
-            <div className="relative isolate px-6 pt-14 lg:px-8">
+            <div className="relative isolate px-6 pt-14 lg:px-8 bg-gray-900">
+                {/* Background Image */}
                 <div
                     aria-hidden="true"
-                    className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                    className="absolute inset-0 -z-10 overflow-hidden h-[100vh]" // Background height small
                 >
-                    <div
-                        style={{
-                            clipPath:
-                                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                        }}
-                        className="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75"
+                    <img
+                        src={backgroundImage}
+                        alt="Background Grocery"
+                        className="w-full h-full object-cover opacity-30"
                     />
                 </div>
-                <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-                    {/* <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-                        <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
-                            Announcing our next round of funding.{' '}
-                            <a href="#" className="font-semibold text-indigo-400">
-                                <span aria-hidden="true" className="absolute inset-0" />
-                                Read more <span aria-hidden="true">&rarr;</span>
-                            </a>
-                        </div>
-                    </div> */}
-                    <div className="text-center">
-                        <h1 className="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">
-                            Data to enrich your online business
+
+                {/* Content Wrapper */}
+                <div className="mx-auto max-w-6xl py-20 lg:py-32 flex flex-col lg:flex-row items-center gap-12">
+
+                    {/* Front Image */}
+                    <div className="flex-shrink-0">
+                        <img
+                            src={image}
+                            alt="Fresh Grocery Basket"
+                            className="w-100 h-auto drop-shadow-2xl"
+                        />
+                    </div>
+
+                    {/* Caption */}
+                    <div className="text-center lg:text-left max-w-2xl">
+                        <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+                            Fresh Groceries, Anytime, Anywhere
                         </h1>
-                        <p className="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-                            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-                            fugiat veniam occaecat.
+                        <p className="mt-6 text-lg text-gray-200 sm:text-xl">
+                            Get fresh fruits, vegetables, and daily essentials delivered
+                            straight to your doorstep with our trusted grocery store service.
                         </p>
-                        <div className="mt-10 flex items-center justify-center gap-x-6">
+                        <div className="mt-8 flex items-center justify-center lg:justify-start gap-x-6">
                             <a
                                 href="#"
-                                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                className="rounded-md bg-green-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                             >
-                                Get started
+                                Shop Now
                             </a>
-                            <a href="#" className="text-sm/6 font-semibold text-white">
-                                Learn more <span aria-hidden="true">→</span>
+                            <a href="#" className="text-sm font-semibold text-white">
+                                Learn More <span aria-hidden="true">→</span>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div
-                    aria-hidden="true"
-                    className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-                >
-                    <div
-                        style={{
-                            clipPath:
-                                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                        }}
-                        className="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-288.75"
-                    />
-                </div>
             </div>
+
+
         </div>
     )
 }
