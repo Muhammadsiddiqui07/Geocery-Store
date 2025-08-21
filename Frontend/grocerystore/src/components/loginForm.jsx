@@ -28,24 +28,31 @@ const LoginForm = () => {
             >
                 <Card
                     title={
-                        <div className="flex items-center justify-around space x-1">
+                        <div className="flex items-center justify-between w-full">
+                            {/* Back Button - Left Side */}
+                            <Button
+                                type="link"
+                                className="text-white underline"
+                                onClick={() => navigate('/')}
+                            >
+                                ←
+                            </Button>
 
-                            <div className="flex items-center justify-evenly space-x-3">
-                                <Button
-                                    color='default'
-                                    type="link"
-                                    className="text-white underline"
-                                    onClick={() => navigate('/')}
-                                >
-                                    ← 
-                                </Button>
-                                <img src={logo} alt="Logo" className="w-20 h-15" />
-                                <span className="text-white text-lg font-semibold">
-                                    Login
-                                </span>
+                            {/* Center Logo + Login */}
+                            <div className="flex items-center justify-center space-x-3 mx-auto">
+                                <img
+                                    src={logo}
+                                    alt="Logo"
+                                    className="w-[35%] md:w-[65%] h-auto"
+                                />
                             </div>
+
+
+                            {/* Right Side Placeholder for Balance */}
+                            <div className="w-10"></div>
                         </div>
                     }
+
                     variant="borderless"
                     className="bg-white/20 border border-white/50 backdrop-blur-md shadow-lg text-white w-100"
                     style={{
@@ -53,7 +60,7 @@ const LoginForm = () => {
                         height: '100%',
                         padding: '40px',
                         maxHeight: '90vh', // Mobile overflow fix
-                        minHeight:'80vh'
+                        minHeight: '80vh'
                     }}
                 >
                     <Form
