@@ -16,7 +16,7 @@ export default function MainPage() {
                 {/* Background Image */}
                 <div
                     aria-hidden="true"
-                    className="absolute inset-0 -z-10 overflow-hidden h-[100vh]" // Background height small
+                    className="absolute inset-0 -z-10 overflow-hidden h-full" // Background height small
                 >
                     <img
                         src={backgroundImage}
