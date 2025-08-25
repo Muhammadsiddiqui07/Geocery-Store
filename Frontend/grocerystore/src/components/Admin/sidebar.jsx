@@ -7,6 +7,7 @@ import DashboardContent from "./dashboardContent";
 import AddProduct from "./addProduct";
 import ShowUser from "./userAccess";
 import Orders from "./order";
+import { CiLogout } from "react-icons/ci";
 
 function SideBar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ function SideBar() {
     };
 
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen w-full bg-gray-100">
             {/* Hamburger button - Always visible on mobile */}
             <button
                 className="md:hidden p-3 bg-white text-black shadow-md fixed top-3 left-3 z-50 rounded-md"
@@ -40,14 +41,13 @@ function SideBar() {
 
             {/* Sidebar */}
             <div
-                className={`bg-gray-900 text-white w-64 h-screen fixed top-0 left-0 z-50 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
-                    } transition-transform duration-300 md:translate-x-0 md:static md:top-0`}
+                className={`bg-gray-900 text-white w-64 h-screen fixed top-0 left-0 z-50 transform 
+                ${isOpen ? "translate-x-0" : "-translate-x-full"}
+                transition-transform duration-300 md:translate-x-0 md:static md:top-0`}
             >
                 {/* Logo + Close button */}
                 <div className="flex items-center justify-between px-4 py-4 border-b border-gray-700">
-                    <img src={logo} alt="logo" className="h-[20vh] w-auto" />
-
-                    {/* Close button - only mobile */}
+                    <img src={logo} alt="logo" className="h-[15vh] w-auto object-contain" />
                     <button
                         className="md:hidden text-white"
                         onClick={() => setIsOpen(false)}
@@ -58,7 +58,6 @@ function SideBar() {
 
                 {/* Sidebar menu */}
                 <ul className="p-4 space-y-4">
-
                     <li
                         className="hover:text-gray-300 cursor-pointer"
                         onClick={() => setShowContent("DashboardContent")}
@@ -84,11 +83,19 @@ function SideBar() {
                         Orders
                     </li>
                 </ul>
+
+                <div className="absolute bottom-4 w-full px-4">
+                    <h4 className="flex items-center gap-2 text-white cursor-pointer hover:text-gray-300">
+                        <CiLogout size={20} /> Logout
+                    </h4>
+                </div>
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 ml-0 md:ml-64 p-6 ml-20">
-                {contentMap[showContent] || <DashboardContent />}
+            <div className="flex-1 md:ml-74 p-4 sm:p-6 bg-white">
+                <div className="flex flex-col gap-6">
+                    {contentMap[showContent] || <DashboardContent />}
+                </div>
             </div>
         </div>
     );
