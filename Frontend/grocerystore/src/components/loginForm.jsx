@@ -26,7 +26,7 @@ const LoginForm = () => {
                     text: 'Welcome back 🎉',
                     confirmButtonColor: '#16a34a'
                 });
-                navigate('/dashboard');
+                navigate('/AdminDashborad');
             }
         } catch (err) {
             console.error(err);
@@ -133,7 +133,7 @@ const LoginForm = () => {
                             OR
                             <br />
                             <Button
-                                className="w-[90%] pt-2 flex items-center justify-center space-x-2"
+                                className="w-[100%] my-5 flex justify-center space-x-2"
                                 onClick={handleGoogleLogin}
                             >
                                 <FaGoogle />
