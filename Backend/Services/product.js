@@ -1,26 +1,51 @@
 import express from 'express'
 import Product from '../Schema/Product.js'
+import multer from "multer";
 
 
 const router = express.Router()
 
-router.post('/addproduct', async (req, res) => {
-    try {
-
-        const { productId, name, price, category, image, rating } = req.body
-        const existingProduct = await Product.findOne({ productId: productId })
-        if (existingProduct) {
-            return res.status(400).send({ message: "Product Already Exists" })
-        }
-        else {
-            const newProduct = new Product({ productId, name, price, category, image, rating })
-            await newProduct.save()
-            return res.status(200).send({ message: "Product Added Successfully!" })
-        }
-    } catch (err) {
-        return res.status(401).send({ message: 'Internal Server Error', err })
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "uploads/"); // uploads folder me save hoga
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + "-" + file.originalname);
     }
-})
+});
+
+const upload = multer({ storage: storage });
+
+router.post("/addproduct", upload.single("image"), async (req, res) => {
+    try {
+        const { productId, name, price, category, rating } = req.body;
+
+        // ✅ Check existing product
+        const existingProduct = await Product.findOne({ productId });
+        if (existingProduct) {
+            return res.status(400).send({ message: "Product Already Exists" });
+        }
+
+        // ✅ Image ka path save karna
+        const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+
+        const newProduct = new Product({
+            productId,
+            name,
+            price,
+            category,
+            image: imagePath,
+            rating
+        });
+
+        await newProduct.save();
+
+        return res.status(200).send({ message: "Product Added Successfully!" });
+    } catch (err) {
+        return res.status(500).send({ message: "Internal Server Error", err });
+    }
+});
+
 
 router.get('/getallproduct', async (req, res) => {
     try {
@@ -82,7 +107,7 @@ router.put('/updateproduct', async (req, res) => {
 router.delete('/deleteproduct', async (req, res) => {
     try {
         const { productId } = req.body;
-        
+
         if (!productId) {
             return res.status(400).send({ message: 'Bad request! productId required' });
         }

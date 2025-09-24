@@ -4,16 +4,30 @@ import logo from '../Assests/logo.png';
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2'; // ✅ SweetAlert2
+import Swal from 'sweetalert2';
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false); // ✅ Loader state
+    const [loading, setLoading] = useState(false);
 
     // ✅ Form submit handler
     const onFinish = async (values) => {
         setLoading(true);
+
         try {
+            // ✅ Admin login
+            if (values.email === 'admin@gmail.com' && values.password === '123456') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    text: 'Welcome Muhammad 🎉',
+                    confirmButtonColor: '#16a34a'
+                });
+                navigate('/AdminDashborad');
+                return; // ✅ prevent API call after admin login
+            }
+
+            // ✅ Normal user login
             const res = await axios.post('http://localhost:4000/api/user/authsystem/login', {
                 email: values.email,
                 password: values.password,
@@ -26,10 +40,11 @@ const LoginForm = () => {
                     text: 'Welcome back 🎉',
                     confirmButtonColor: '#16a34a'
                 });
-                navigate('/AdminDashborad');
+                navigate('/'); // ✅ Redirect after successful login
             }
+
         } catch (err) {
-            console.error(err);
+            console.error("Login error:", err);
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -42,7 +57,7 @@ const LoginForm = () => {
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        console.log('Validation Failed:', errorInfo);
     };
 
     // ✅ Google Login
@@ -51,11 +66,8 @@ const LoginForm = () => {
     };
 
     return (
-        <div
-            className="flex items-start justify-center bg-cover bg-center mb-20"
-            style={{ height: '70vh' }}
-        >
-            <div className="w-full max-w-md" style={{ width: '100%', height: '100%' }}>
+        <div className="flex items-start justify-center bg-cover bg-center mb-20" style={{ height: '70vh' }}>
+            <div className="w-full max-w-md h-full">
                 <Card
                     title={
                         <div className="flex items-center justify-between w-full">
@@ -70,11 +82,7 @@ const LoginForm = () => {
 
                             {/* Logo */}
                             <div className="flex items-center justify-center space-x-3 mx-auto">
-                                <img
-                                    src={logo}
-                                    alt="Logo"
-                                    className="w-[35%] md:w-[65%] h-auto"
-                                />
+                                <img src={logo} alt="Logo" className="w-[30%] md:w-[55%] h-auto" />
                             </div>
 
                             <div className="w-10"></div>
@@ -82,24 +90,19 @@ const LoginForm = () => {
                     }
                     variant="borderless"
                     className="bg-white/20 border border-white/50 backdrop-blur-md shadow-lg text-white"
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                        padding: '40px',
-                        maxHeight: '90vh',
-                        minHeight: '80vh',
-                    }}
+                    style={{ padding: '40px', maxHeight: '90vh', minHeight: '80vh' }}
                 >
                     <Form
-                        name="basic"
+                        name="loginForm"
                         labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
+                        wrapperCol={{ span: 19 }}
                         style={{ maxWidth: 600 }}
                         initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
+                        {/* Email */}
                         <Form.Item
                             label={<span className="text-white">Email</span>}
                             name="email"
@@ -108,6 +111,7 @@ const LoginForm = () => {
                             <Input className="bg-white/40 text-black placeholder-gray-600" />
                         </Form.Item>
 
+                        {/* Password */}
                         <Form.Item
                             label={<span className="text-white">Password</span>}
                             name="password"
@@ -116,24 +120,24 @@ const LoginForm = () => {
                             <Input.Password className="bg-white/40 text-black placeholder-gray-600" />
                         </Form.Item>
 
-                        <Form.Item label={null}>
+                        {/* Submit Button */}
+                        <Form.Item>
                             <Button
                                 type="primary"
                                 htmlType="submit"
-                                className="bg-green-600 hover:bg-green-500 flex items-center justify-center"
+                                className="bg-green-600 hover:bg-green-500 flex items-center justify-center ml-20"
                                 disabled={loading}
                             >
                                 {loading ? <Spin size="small" /> : "Submit"}
                             </Button>
                         </Form.Item>
 
+                        {/* Google Login */}
                         <div className="text-center text-white w-full">
                             <hr />
-                            <br />
-                            OR
-                            <br />
+                            <p className="my-3">OR</p>
                             <Button
-                                className="w-[100%] my-5 flex justify-center space-x-2"
+                                className="w-full my-5 flex justify-center space-x-2"
                                 onClick={handleGoogleLogin}
                             >
                                 <FaGoogle />

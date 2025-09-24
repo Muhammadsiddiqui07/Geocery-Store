@@ -1,14 +1,14 @@
-import backgroundImage from '../Assests/back.png'
-import LoginForm from '../components/loginForm'
+import backgroundImage from '../Assests/back.png';
+import LoginForm from '../components/loginForm';
 
 function Login() {
     return (
-        <div className="bg-gray-900 h-screen"> {/* yahan h-[80vh] ki jagah h-screen */}
-            <div className="relative isolate px-6 pt-14 lg:px-8 h-full"> {/* h-full taake andar ka bhi poori height le */}
-                {/* Background Image */}
+        <div className="bg-gray-900 min-h-screen flex md:h-full sm:h-full"> 
+            <div className="relative isolate px-6 pt-14 lg:px-8 flex-1 flex items-center justify-center ">
+
                 <div
                     aria-hidden="true"
-                    className="absolute inset-0 -z-10 overflow-hidden h-full"
+                    className="absolute inset-0 -z-10 overflow-hidden"
                 >
                     <img
                         src={backgroundImage}
@@ -17,13 +17,12 @@ function Login() {
                     />
                 </div>
 
-                <div className="flex items-center justify-center h-full">
+                <div className="w-full  px-4 sm:px-6 lg:px-8">
                     <LoginForm />
                 </div>
-
             </div>
         </div>
-    )
+    );
 }
 
-export default Login
+export default Login;
